@@ -40,19 +40,6 @@
     }
 }
 
-.auth__link {
-    color: $dark-gray;
-    text-decoration: none;
-    font-size: 14px;
-
-    &:visited {
-        color: $dark-gray;
-    }
-    &:hover {
-        color: darken($color: $dark-gray, $amount: 15);
-    }
-}
-
 .auth__social-networks {
     align-items: center;
     display: flex;

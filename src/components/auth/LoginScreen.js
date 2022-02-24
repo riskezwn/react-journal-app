@@ -42,7 +42,7 @@ export const LoginScreen = () => {
                         </p>
                     </div>
                 </div>
-                <Link to="/auth/register" className="auth__link">Create new account</Link>
+                <Link to="/auth/register" className="link">Create new account</Link>
             </form>
         </div>
     );
