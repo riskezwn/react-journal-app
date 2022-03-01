@@ -1,5 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Rolling } from "react-loading-io/dist/Rolling";
 import { useDispatch } from "react-redux";
 import {
     Route,
@@ -15,13 +16,28 @@ import { AuthRouter } from "./AuthRouter";
 export const AppRouter = () => {
     const dispatch = useDispatch();
 
+    const [checking, setChecking] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user?.uid) {
                 dispatch(login(user.uid, user.displayName));
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
             }
+            setChecking(false);
         });
-    }, [dispatch]);
+    }, [dispatch, setChecking, setIsLoggedIn]);
+
+    if (checking) {
+        return (
+            <div className="loading__screen">
+                <Rolling size={64} color="#ffffff" />
+            </div>
+        );
+    }
 
     return (
         <Router>
