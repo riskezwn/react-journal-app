@@ -1,15 +1,12 @@
 import {
     createUserWithEmailAndPassword,
-    getAuth,
     signInWithEmailAndPassword,
     signInWithPopup,
     updateProfile,
 } from "firebase/auth";
-import { googleAuthProvider } from "../firebase/firebase-config";
+import { auth, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
-
-const auth = getAuth();
 
 export const startLoginEmailPassword = (email, password) => {
     return (dispatch) => {
