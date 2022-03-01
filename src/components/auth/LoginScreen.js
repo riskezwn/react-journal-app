@@ -1,11 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import validator from "validator";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
+import { removeError, setError } from "../../actions/ui";
 
 export const LoginScreen = () => {
     const dispatch = useDispatch();
+    const { msgError } = useSelector((state) => state.ui);
 
     const [formValues, handleInputChange] = useForm({
         email: "riskezwn@gmail.com",
@@ -15,7 +18,18 @@ export const LoginScreen = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(startLoginEmailPassword(email, password));
+        if (isFormValid()) {
+            dispatch(startLoginEmailPassword(email, password));
+        }
+    };
+
+    const isFormValid = () => {
+        if (!validator.isEmail(email)) {
+            dispatch(setError("Email is not valid"));
+            return false;
+        }
+        dispatch(removeError());
+        return true;
     };
 
     const handleGoogleLogin = () => {
@@ -26,6 +40,9 @@ export const LoginScreen = () => {
         <div>
             <h2 className="auth__title">Login</h2>
             <form onSubmit={handleLogin}>
+                {msgError && (
+                    <div className="auth__alert-error">{msgError}</div>
+                )}
                 <input
                     type="email"
                     placeholder="john@doe.com"
