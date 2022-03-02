@@ -12,6 +12,8 @@ import { login } from "../actions/auth";
 import { JournalScreen } from "../components/journal/JournalScreen";
 import { auth } from "../firebase/firebase-config";
 import { AuthRouter } from "./AuthRouter";
+import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
@@ -43,8 +45,22 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Routes>
-                    <Route path="/auth/*" element={<AuthRouter />} />
-                    <Route path="/" element={<JournalScreen />} />
+                    <Route
+                        path="/auth/*"
+                        element={
+                            <PublicRoute isLoggedIn={isLoggedIn}>
+                                <AuthRouter />
+                            </PublicRoute>
+                        }
+                    ></Route>
+                    <Route
+                        path="/"
+                        element={
+                            <PrivateRoute isLoggedIn={isLoggedIn}>
+                                <JournalScreen />
+                            </PrivateRoute>
+                        }
+                    ></Route>
                     <Route path="*" element={<Navigate to="/auth/login" />} />
                 </Routes>
             </div>
