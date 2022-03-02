@@ -5,6 +5,7 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
+import Swal from "sweetalert2";
 import { auth, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
@@ -18,7 +19,7 @@ export const startLoginEmailPassword = (email, password) => {
                 dispatch(finishLoading());
             })
             .catch((e) => {
-                console.error(e);
+                Swal.fire("Something go wrong :(", "User not found", "error");
                 dispatch(finishLoading());
             });
     };
@@ -34,7 +35,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
                 dispatch(finishLoading());
             })
             .catch((e) => {
-                console.error(e);
+                Swal.fire("Something go wrong :(", "Registration could not be completed", "error");
                 dispatch(finishLoading());
             });
     };
