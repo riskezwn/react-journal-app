@@ -8,6 +8,7 @@ import {
 import Swal from "sweetalert2";
 import { auth, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
+import { notesLogout } from "./notes";
 import { finishLoading, startLoading } from "./ui";
 
 export const startLoginEmailPassword = (email, password) => {
@@ -35,7 +36,11 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
                 dispatch(finishLoading());
             })
             .catch((e) => {
-                Swal.fire("Something go wrong :(", "Registration could not be completed", "error");
+                Swal.fire(
+                    "Something go wrong :(",
+                    "Registration could not be completed",
+                    "error"
+                );
                 dispatch(finishLoading());
             });
     };
@@ -53,6 +58,7 @@ export const startLogout = () => {
     return async (dispatch) => {
         await signOut(auth);
         dispatch(logout());
+        dispatch(notesLogout());
     };
 };
 
