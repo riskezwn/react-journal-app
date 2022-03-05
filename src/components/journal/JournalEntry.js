@@ -17,6 +17,12 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
             })
         );
     };
+
+    let bodyReduced = body;
+    if (bodyReduced.length > 150) {
+        bodyReduced = bodyReduced.slice(0, 150) + "...";
+    }
+
     return (
         <div className="journal__entry" onClick={handleEntryClick}>
             {url && (
@@ -31,7 +37,7 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
 
             <div className="journal__entry-body">
                 <p className="journal__entry-title">{title}</p>
-                <p className="journal__entry-content">{body}</p>
+                <p className="journal__entry-content">{bodyReduced}</p>
             </div>
 
             <div className="journal__entry-date-box">
