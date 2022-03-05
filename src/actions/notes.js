@@ -1,4 +1,10 @@
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    updateDoc,
+} from "firebase/firestore";
 import Swal from "sweetalert2";
 import { db } from "../firebase/firebase-config";
 import { fileUpload } from "../helpers/fileUpload";
@@ -87,9 +93,24 @@ export const startUploading = (file) => {
         });
 
         const fileUrl = await fileUpload(file);
-        activeNote.url = fileUrl; 
+        activeNote.url = fileUrl;
 
         dispatch(startSaveNote(activeNote));
         Swal.close();
     };
 };
+
+export const startDeleting = (id) => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+        const docRef = doc(db, `${uid}/journal/notes`, id);
+        await deleteDoc(docRef);
+
+        dispatch(deleteNote(id));
+    };
+};
+
+export const deleteNote = (id) => ({
+    type: types.notesDelete,
+    payload: id,
+});

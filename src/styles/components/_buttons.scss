@@ -1,5 +1,6 @@
 .btn {
     background-color: transparent;
+    text-align: center;
     border: none;
     color: $white;
     cursor: pointer;
@@ -24,6 +25,15 @@
     }
     &:hover {
         background-color: darken($color: $primary, $amount: 15);
+    }
+}
+
+.btn-danger {
+    background-color: $error;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: darken($color: $error, $amount: 10);
     }
 }
 
