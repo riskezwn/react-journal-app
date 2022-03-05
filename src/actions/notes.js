@@ -116,6 +116,13 @@ export const startDeleting = (id) => {
         await deleteDoc(docRef);
 
         dispatch(deleteNote(id));
+        Swal.fire({
+            title: "Entry deleted!",
+            icon: "success",
+            timer: 1500,
+            position: "top-end",
+            showConfirmButton: false,
+        });
     };
 };
 
