@@ -20,24 +20,25 @@ export const JournalEntry = ({ id, date, title, body, url }) => {
 
     let bodyReduced = body;
     if (bodyReduced.length > 150) {
-        bodyReduced = bodyReduced.slice(0, 150) + "...";
+        bodyReduced = bodyReduced.slice(0, 120) + "...";
     }
 
     return (
         <div className="journal__entry" onClick={handleEntryClick}>
-            {url && (
-                <div
-                    className="journal__entry-picture"
-                    style={{
-                        backgroundSize: "cover",
-                        backgroundImage: `url(${url})`,
-                    }}
-                ></div>
-            )}
-
-            <div className="journal__entry-body">
-                <p className="journal__entry-title">{title}</p>
-                <p className="journal__entry-content">{bodyReduced}</p>
+            <div className="journal__entry-content">
+                {url && (
+                    <div
+                        className="journal__entry-picture"
+                        style={{
+                            backgroundSize: "cover",
+                            backgroundImage: `url(${url})`,
+                        }}
+                    ></div>
+                )}
+                <div className="journal__entry-body">
+                    <p className="journal__entry-title">{title}</p>
+                    <p className="journal__entry-content">{bodyReduced}</p>
+                </div>
             </div>
 
             <div className="journal__entry-date-box">

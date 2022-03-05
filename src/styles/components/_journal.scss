@@ -70,9 +70,13 @@
     user-select: none;
 }
 
+.journal__entry-content {
+    display: flex;
+}
+
 .journal__entry-picture {
-    height: 75px;
-    width: 75px;
+    min-height: 75px;
+    min-width: 60px;
 }
 
 .journal__entry-body {
@@ -89,7 +93,7 @@
 }
 
 .journal__entry-date-box {
-    width: 20%;
+    min-width: 20%;
     align-items: center;
     display: flex;
     flex-direction: column;
