@@ -15,8 +15,24 @@ const firebaseConfig = {
     appId: "1:247414867925:web:3d604f994081b65413df5c",
 };
 
-// Initialize Firebase
-initializeApp(firebaseConfig);
+const firebaseConfigTesting = {
+    apiKey: "AIzaSyD3T0UpBFRhp9-LVzhHQcc9cUYdCwhoIgk",
+    authDomain: "sql-demos-6aaea.firebaseapp.com",
+    projectId: "sql-demos-6aaea",
+    storageBucket: "sql-demos-6aaea.appspot.com",
+    messagingSenderId: "489811236640",
+    appId: "1:489811236640:web:bde963ce71b6b2f4a46945",
+    measurementId: "G-LP6K65KM8R"
+  };
+
+if (process.env.NODE_ENV === 'test') {
+    // test
+    initializeApp(firebaseConfigTesting);
+    
+} else {
+    // dev, prod
+    initializeApp(firebaseConfig);
+}
 
 const db = getFirestore();
 const googleAuthProvider = new GoogleAuthProvider();
